@@ -14,7 +14,7 @@ NC='\033[0m'
 
 check_prerequisites() {
   if ! command -v socat >/dev/null 2>&1; then
-    echo -e "${RED}Error: socat is not installed. Please install it first.${NC}"
+    echo -e "${RED}Socat package is not installed.${NC}"
     exit 1
   fi
 
@@ -65,12 +65,12 @@ select_backend() {
 
 
 show_info() {
-  echo -e "${BLUE}=== HAProxy Runtime Information ===${NC}"
+  echo -e "${BLUE}=== HAProxy Runtime Info ===${NC}"
   run_socat "show info" | awk -F: '{printf "%-30s %s\n", $1, $2}'
 }
 
 show_errors() {
-  echo -e "${BLUE}=== Recent Errors ===${NC}"
+  echo -e "${BLUE}=== Latest Errors ===${NC}"
   local errors
   errors=$(run_socat "show errors")
   [ -z "$errors" ] && echo -e "${YELLOW}No recent errors${NC}" && return
@@ -232,14 +232,14 @@ watch_stats() {
 }
 
 change_socket() {
-  read -rp "Enter new socket path: " new_sock
+  read -rp "New socket path: " new_sock
   [ -S "$new_sock" ] && HAPROXY_SOCK="$new_sock" || \
-    echo -e "${RED}Invalid socket! Keeping: $HAPROXY_SOCK${NC}"
+    echo -e "${RED}Invalid socket. Keeping default one: $HAPROXY_SOCK${NC}"
 }
 
 main_menu() {
   clear
-  echo -e "${BLUE}=== HAProxy Management Console ===${NC}"
+  echo -e "${BLUE}=== HAProxy Socat Swiss Knife ===${NC}"
   echo -e "Socket: ${GREEN}$HAPROXY_SOCK${NC}"
   echo "1. Show Runtime Info      2. Show Errors"
   echo "3. Active Sessions        4. Full Statistics"
@@ -276,5 +276,5 @@ show_menu() {
   done
 }
 
-trap 'echo -e "\n${GREEN}Exiting...${NC}"; exit 0' SIGINT SIGTERM
+trap 'echo -e "\n${GREEN}Bye bye...${NC}"; exit 0' SIGINT SIGTERM
 show_menu
