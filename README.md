@@ -11,7 +11,7 @@ A tool to interact with the HAProxy socket using [socat](https://www.kali.org/to
 ## 🛠 Features
 - **Simplified use:** Interactive menu with preconfigured complex commands for fast supervision.
 - **Speed:** Diagnose network problems quickly.
-- - **Self descriptive:** Pretty much run and gun.
+- **Self descriptive:** Pretty much run and gun.
 - **Lightweight & Efficient:** Ensures minimal resource usage for smooth performance.
 
 ## ⚠️ Important
