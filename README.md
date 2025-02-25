@@ -22,3 +22,4 @@ A tool to interact with the haproxy socket using socat to make server/backend st
 # run as sudo (some commands require root to make changes)
 bash haproxy_socat_swiss_knife.sh
 ```
+Note that my functions assume that your HAProxy configuration doesn't have stick table IDs specified, so they share the backend name.
