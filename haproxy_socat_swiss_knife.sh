@@ -10,7 +10,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m'  # No Color
+NC='\033[0m'
 
 check_prerequisites() {
   if ! command -v socat >/dev/null 2>&1; then
