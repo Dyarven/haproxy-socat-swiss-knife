@@ -251,7 +251,7 @@ main_menu() {
   echo "7. Show All Stick Tables  8. Clear Stick Table"
   echo "9. Change Server State    10. Check Cookies"
   echo "11. Watch Statistics      12. Show Frontends"
-  echo "13. Change Socket        "0. Exit"                      
+  echo "13. Change Socket         0. Exit"                      
   echo -e "${BLUE}===================================${NC}"
 }
 
