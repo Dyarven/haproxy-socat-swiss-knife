@@ -218,7 +218,8 @@ watch_stats() {
   read -rp "Enter refresh interval (seconds): " interval
   interval=${interval:-2}
   echo -e "${GREEN}Starting monitoring (Ctrl+C to stop)...${NC}"
-  
+
+  # God help anyone going back to this part
   watch -n $interval -c "
     echo 'show stat' | socat unix-connect:'$HAPROXY_SOCK' stdio | \
     awk -F, 'BEGIN {ORS=\" \"}
