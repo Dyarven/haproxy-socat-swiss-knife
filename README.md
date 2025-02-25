@@ -1,2 +1,24 @@
-# haproxy-socat-swiss-knife
-Networking tool to interact with the HAProxy socket for debugging and real time configuration changes.
+# HAProxy Socat Swiss Knife
+
+[![Star this repo](https://img.shields.io/github/stars/Dyarven/haproxy-socat-swiss-knife?style=social)](https://github.com/Dyarven/haproxy-socat-swiss-knife/stargazers)
+[![Follow me](https://img.shields.io/github/followers/Dyarven?style=social)](https://github.com/Dyarven)
+[![License](https://img.shields.io/github/license/Dyarven/haproxy-socat-swiss-knife)](https://github.com/Dyarven/haproxy-socat-swiss-knife/blob/main/LICENSE)
+
+A tool to interact with the haproxy socket using socat to make server/backend state changes and view stick-tables, session cookies, stats, traffic... easily.
+
+---
+
+## 🛠 Features
+- **Simplified use:** Interactive menu with preconfigured complex commands for fast supervision.
+- **Speed:** Diagnose network problems quickly.
+- - **Self descriptive:** Pretty much run and gun.
+- **Lightweight & Efficient:** Ensures minimal resource usage for smooth performance.
+
+## ⚠️ Important
+- Requires socat package and a running haproxy with the stats socket configured with admin permissions (duh)
+
+### Run the Script
+```bash
+# run as sudo (some commands require root to make changes)
+bash haproxy_socat_swiss_knife.sh
+```
