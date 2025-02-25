@@ -28,7 +28,7 @@ run_socat() {
   local cmd="$1"
   output=$(echo "$cmd" | socat stdio unix-connect:"$HAPROXY_SOCK" 2>&1)
   if [ $? -ne 0 ]; then
-    echo -e "${RED}Command failed: $cmd${NC}"
+    echo -e "${RED}Socat run command failed: $cmd${NC}"
     echo "$output"
     return 1
   fi
