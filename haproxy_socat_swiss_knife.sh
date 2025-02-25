@@ -63,6 +63,10 @@ select_backend() {
   return 1
 }
 
+show_frontends() {
+  echo -e "${BLUE}=== Frontends ===${NC}"
+  run_socat "show stat" | awk -F, 'NR>1 && $2 == "FRONTEND" {printf "%-25s [%s]\n", $1, $18}'
+}
 
 show_info() {
   echo -e "${BLUE}=== HAProxy Runtime Info ===${NC}"
@@ -246,8 +250,8 @@ main_menu() {
   echo "5. Peers Status           6. Select a Stick Table"
   echo "7. Show All Stick Tables  8. Clear Stick Table"
   echo "9. Change Server State    10. Check Cookies"
-  echo "11. Watch Statistics      12. Change Socket"
-  echo "0. Exit"
+  echo "11. Watch Statistics      12. Show Frontends"
+  echo "13. Change Socket        "0. Exit"                      
   echo -e "${BLUE}===================================${NC}"
 }
 
@@ -271,7 +275,8 @@ show_menu() {
         9) change_backend_server_state ;;
         10) check_cookies ;;
         11) watch_stats ;;
-        12) change_socket ;;
+        12) show_frontends ;;
+        13) change_socket ;;
         0) exit 0 ;;
         *) echo -e "${RED}Invalid option${NC}" ;;
       esac
