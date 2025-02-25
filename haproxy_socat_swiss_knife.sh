@@ -256,23 +256,29 @@ show_menu() {
   while true; do
     main_menu
     read -rp "Enter choice: " choice
-    case $choice in
-      1) show_info ;;
-      2) show_errors ;;
-      3) show_sessions ;;
-      4) show_statistics ;;
-      5) show_peers ;;
-      6) show_stick_table ;;
-      7) show_all_stick_tables ;;
-      8) clear_stick_table ;;
-      9) change_backend_server_state ;;
-      10) check_cookies ;;
-      11) watch_stats ;;
-      12) change_socket ;;
-      0) exit 0 ;;
-      *) echo -e "${RED}Invalid option!${NC}" ;;
-    esac
-    read -rp "Press Enter to continue..."
+   # Clear input buffer
+    while read -t 0 -r -n 10000; do : ; done
+    if [[ "$choice" =~ ^[0-9]+$ ]]; then
+      case $choice in
+        1) show_info ;;
+        2) show_errors ;;
+        3) show_sessions ;;
+        4) show_statistics ;;
+        5) show_peers ;;
+        6) show_stick_table ;;
+        7) show_all_stick_tables ;;
+        8) clear_stick_table ;;
+        9) change_backend_server_state ;;
+        10) check_cookies ;;
+        11) watch_stats ;;
+        12) change_socket ;;
+        0) exit 0 ;;
+        *) echo -e "${RED}Invalid option${NC}" ;;
+      esac
+    else
+      echo -e "${RED}Invalid option (please enter a number)${NC}"
+    fi
+    read -rp "Press enter to continue..."
   done
 }
 
