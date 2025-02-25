@@ -22,6 +22,6 @@ A tool to interact with the HAProxy socket using [socat](https://www.kali.org/to
 ### Run the Script
 ```bash
 # run as sudo (some commands require root to make changes)
-bash haproxy_socat_swiss_knife.sh
+bash hssk.sh
 ```
 
