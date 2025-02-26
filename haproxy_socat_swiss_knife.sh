@@ -237,11 +237,11 @@ main_menu() {
   echo -e "${BLUE}=== HAProxy Socat Swiss Knife ===${NC}"
   echo -e "Socket: ${GREEN}$HAPROXY_SOCK${NC}"
   echo "1. Show Runtime Info      2. Show Errors"
-  echo "3. Active Sessions        4. Full Statistics"
+  echo "3. Active Sessions        4. Show Statistics"
   echo "5. Peers Status           6. Select a Stick Table"
   echo "7. Clear Stick Table      8. List Frontend Details"
   echo "9. Change Backend Status  10. Check Cookies"
-  echo "11. Watch Statistics      12. Change Socket"
+  echo "11.Watch Statistics       12. Change Socket"
   echo "0. Exit"
   echo -e "${BLUE}===================================${NC}"
 }
