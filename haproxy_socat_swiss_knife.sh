@@ -226,6 +226,23 @@ watch_stats() {
   "
 }
 
+trigger_health_check() {
+  select_backend || return
+  local server_list
+  server_list=$(run_socat "show stat" | awk -F, -v bk="$selected_backend" 'NR>1 && $1==bk && $2 != "BACKEND" && $2 != "FRONTEND" {print $2}')
+  [ -z "$server_list" ] && echo -e "${RED}No servers found${NC}" && return 1
+
+  PS3="Select a server: "
+  select server in $server_list; do
+    [ -z "$server" ] && return 1
+    echo -e "${GREEN}Triggering health check for $selected_backend/$server...${NC}"
+    run_socat "set server $selected_backend/$server check"
+    new_status=$(run_socat "show stat" | awk -F, -v bk="$selected_backend" -v srv="$server" '$1==bk && $2==srv {print $18}')
+    echo -e "New status: ${GREEN}$new_status${NC}"
+    break
+  done
+}
+
 change_socket() {
   read -rp "New socket path: " new_sock
   [ -S "$new_sock" ] && HAPROXY_SOCK="$new_sock" || \
@@ -234,16 +251,16 @@ change_socket() {
 
 main_menu() {
   clear
-  echo -e "${BLUE}=== HAProxy Socat Swiss Knife ===${NC}"
-  echo -e "Socket: ${GREEN}$HAPROXY_SOCK${NC}"
-  echo "1. Show Runtime Info      2. Show Errors"
-  echo "3. Active Sessions        4. Show Statistics"
-  echo "5. Peers Status           6. Select a Stick Table"
-  echo "7. Clear Stick Table      8. List Frontend Details"
-  echo "9. Change Backend Status  10. Check Cookies"
-  echo "11.Watch Statistics       12. Change Socket"
-  echo "0. Exit"
-  echo -e "${BLUE}===================================${NC}"
+  echo -e "${BLUE}======== HAProxy Socat Swiss Knife ========${NC}"
+  echo -e " Socket: ${GREEN}$HAPROXY_SOCK${NC}"
+  echo  "1. Show Runtime Info        2. Show Errors"
+  echo  "3. Active Sessions          4. Show Statistics"
+  echo  "5. Peers Status             6. Select a Stick Table"
+  echo  "7. Clear Stick Table        8. List Frontend Details"
+  echo  "9. Change Backend Status   10. Check Cookies"
+  echo "11. Watch Statistics        12. Trigger Health Check"
+  echo "13. Change Socket            0. Exit"
+  echo -e "${BLUE}===========================================${NC}"
 }
 
 show_menu() {
@@ -251,28 +268,24 @@ show_menu() {
   while true; do
     main_menu
     read -rp "Enter choice: " choice
-   # Clear input buffer
-    while read -t 0 -r -n 10000; do : ; done
-    if [[ "$choice" =~ ^[0-9]+$ ]]; then
-      case $choice in
-        1) show_info ;;
-        2) show_errors ;;
-        3) show_sessions ;;
-        4) show_statistics ;;
-        5) show_peers ;;
-        6) show_stick_table ;;
-        7) clear_stick_table ;;
-        8) list_frontends ;;
-        9) change_backend_server_state ;;
-        10) check_cookies ;;
-        11) watch_stats ;;
-        12) change_socket ;;
-        0) exit 0 ;;
-        *) echo -e "${RED}Invalid option${NC}" ;;
-      esac
-    else
-      echo -e "${RED}Invalid option (please enter a number)${NC}"
-    fi
+    while read -t 0 -r -n 10000; do : ; done  # Clear input buffer
+    case $choice in
+      1) show_info ;;
+      2) show_errors ;;
+      3) show_sessions ;;
+      4) show_statistics ;;
+      5) show_peers ;;
+      6) show_stick_table ;;
+      7) clear_stick_table ;;
+      8) list_frontends ;;
+      9) change_backend_server_state ;;
+      10) check_cookies ;;
+      11) watch_stats ;;
+      12) trigger_health_check ;;
+      13) change_socket ;;
+      0) exit 0 ;;
+      *) echo -e "${RED}Invalid option${NC}" ;;
+    esac
     read -rp "Press enter to continue..."
   done
 }
