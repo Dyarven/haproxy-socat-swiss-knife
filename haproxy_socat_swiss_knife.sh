@@ -110,17 +110,6 @@ show_peers() {
   echo "$peers"
 }
 
-show_all_stick_tables() {
-  local backends
-  backends=$(run_socat "show stat" | awk -F, 'NR>1 && $42 > 0 {print $1}' | sort | uniq)
-  [ -z "$backends" ] && echo -e "${YELLOW}No stick tables found${NC}" && return
-
-  while read -r backend; do
-    echo -e "\n${BLUE}=== Stick Table: $backend ===${NC}"
-    show_stick_table "$backend"
-  done <<< "$backends"
-}
-
 show_stick_table() {
   [ -z "$1" ] && select_backend || selected_backend="$1"
   [ -z "$selected_backend" ] && return 1
