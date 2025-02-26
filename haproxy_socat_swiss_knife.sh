@@ -236,7 +236,7 @@ trigger_health_check() {
   select server in $server_list; do
     [ -z "$server" ] && return 1
     echo -e "${GREEN}Triggering health check for $selected_backend/$server...${NC}"
-    run_socat "set server $selected_backend/$server check"
+    run_socat "run health-check $selected_backend/$server"
     new_status=$(run_socat "show stat" | awk -F, -v bk="$selected_backend" -v srv="$server" '$1==bk && $2==srv {print $18}')
     echo -e "New status: ${GREEN}$new_status${NC}"
     break
