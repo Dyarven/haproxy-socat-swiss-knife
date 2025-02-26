@@ -4,7 +4,7 @@
 [![Follow me](https://img.shields.io/github/followers/Dyarven?style=social)](https://github.com/Dyarven)
 [![License](https://img.shields.io/github/license/Dyarven/haproxy-socat-swiss-knife)](https://github.com/Dyarven/haproxy-socat-swiss-knife/blob/main/LICENSE)
 
-A tool to interact with the HAProxy socket using [socat](https://www.kali.org/tools/socat/) to make server/backend state changes and view stick-tables, session cookies, network traffic and other stuff more easily.
+A tool to interact with the HAProxy socket using [socat](https://www.kali.org/tools/socat/) to make server/backend state changes and view stick-tables, force healthchecks control network traffic and other stuff more easily.
 
 ---
 
