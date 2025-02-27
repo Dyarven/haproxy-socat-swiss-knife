@@ -63,7 +63,7 @@ list_frontends() {
   stat_output=$(run_socat "show stat")
 
   echo -e "${BLUE}=== Frontends ===${NC}"
-  # Show the list numbered to ease selection in next function. Need to define it inside AWK (since the program is not aware of bash local variables)
+  # Show the list numbered to ease selection in next function. Need to define it inside AWK (since it's not aware of bash local variables)
   echo "$stat_output" | awk -F, 'BEGIN {count=1} $2=="FRONTEND" {printf "%-3d %-20s %-10s %-15s\n", count++, $1, $2, $18}'
 }
 
