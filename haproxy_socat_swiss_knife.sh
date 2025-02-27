@@ -94,9 +94,9 @@ show_sessions() {
   }' | column -t -s,
 }
 
-show_statistics() {
-  echo -e "${BLUE}=== Full Statistics ===${NC}"
-  run_socat "show stat" | column -s, -t | less -S -X +F
+show_threads() {
+  echo -e "${BLUE}=== Threads ===${NC}"
+  run_socat "show threads" | column -s, -t | less -S -X +F
 }
 
 show_peers() {
@@ -298,7 +298,7 @@ show_menu() {
       1) show_info ;;
       2) show_errors ;;
       3) show_sessions ;;
-      4) show_statistics ;;
+      4) show_threads ;;
       5) show_peers ;;
       6) show_stick_table ;;
       7) clear_stick_table ;;
