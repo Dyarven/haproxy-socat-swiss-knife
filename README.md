@@ -9,11 +9,11 @@ A tool to interact with the HAProxy socket using [socat](https://www.kali.org/to
 ---
 
 ## 🛠 Features
-- **Simple to use:** Interactive menu with preconfigured complex commands for fast supervision.
-- **Fast:** Diagnose network problems quickly.
+- **Interactive and preset mode**: Includes a workaround to support interactive mode in Debian based systems using netcat and socat readline in RHEL based ones.
+- **Fast and simple:** Interactive menu with predefined and parsed complex commands to diagnose problems quickly.
 - **Self descriptive:** Pretty much run and gun.
 - **Lightweight & Efficient:** Ensures minimal resource usage for smooth performance.
-- **Native:** Fully made in bash.
+- **Native:** Fully made in bash with native tools.
 
 ## ⚠️ Important
 - Requires socat package and a running haproxy with the stats socket configured with admin permissions (duh)
