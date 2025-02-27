@@ -24,7 +24,7 @@ A tool to interact with the HAProxy socket using [socat](https://www.kali.org/to
 # Copy the script in /usr/local/bin as "hssk" and ensure proper permissions. Now you can run it from anywhere simply typing:
 hssk
 ```
-### Run the Script
+### Run the Script (no install)
 ```bash
 # run as sudo (some commands require root to make changes)
 bash haproxy_socat_swiss_knife.sh
