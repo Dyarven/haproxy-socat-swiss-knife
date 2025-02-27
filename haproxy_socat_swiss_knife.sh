@@ -29,6 +29,7 @@ run_socat() {
   echo "$output"
 }
 
+# Pending to use "state" or "status" for things, but not a mix of both in the select/switch FE/BE functions...
 select_backend() {
   local stat_output
   stat_output=$(run_socat "show stat")
@@ -62,9 +63,29 @@ list_frontends() {
   stat_output=$(run_socat "show stat")
 
   echo -e "${BLUE}=== Frontends ===${NC}"
-  echo "$stat_output" | awk -F, '$2=="FRONTEND" {printf "%-20s %-10s %-15s\n", $1, $2, $18}'
+  # Show the list numbered to ease selection in next function. Need to define it inside AWK ("local count" is not valid)
+  echo "$stat_output" | awk -F, 'BEGIN {count=1} $2=="FRONTEND" {printf "%-3d %-20s %-10s %-15s\n", count++, $1, $2, $18}'
 }
 
+# Should add functionality to display status as well before modifying it
+enable_disable_frontend() {
+  list_frontends
+  local frontends
+  # Store frontends in array
+  mapfile -t frontends < <(run_socat "show stat" | awk -F, '$2=="FRONTEND" {print $1}')
+  read -rp "Enter a number (1-${#frontends[@]}): " num
+  [[ ! "$num" =~ ^[0-9]+$ || $num -lt 1 || $num -gt ${#frontends[@]} ]] && return 1
+
+  read -rp "Enter 1 to enable or 2 to disable $frontend" action
+  case $action in
+    1) cmd="enable frontend ${frontends[$((num-1))]}" ;;
+    2) cmd="disable frontend ${frontends[$((num-1))]}" ;;
+    *) return 1 ;;
+  esac
+  run_socat "$cmd"
+  new_state=$(run_socat "show stat" | awk -F, -v fe="$frontend" '$1==fe && $2=="FRONTEND" {print $18}')
+  echo -e "New state: ${GREEN}$new_state${NC}"
+}
 
 show_info() {
   echo -e "${BLUE}=== HAProxy Runtime Info ===${NC}"
