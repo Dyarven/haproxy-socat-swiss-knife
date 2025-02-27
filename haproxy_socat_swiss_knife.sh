@@ -6,7 +6,7 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-check_prerequisites() {
+check_reqs() {
   if ! command -v socat >/dev/null 2>&1; then
     echo -e "${RED}Socat package is not installed.${NC}"
     exit 1
@@ -289,7 +289,7 @@ main_menu() {
 }
 
 show_menu() {
-  check_prerequisites
+  check_reqs
   while true; do
     main_menu
     read -rp "Enter choice: " choice
