@@ -274,10 +274,26 @@ change_socket() {
     echo -e "${RED}Invalid socket. Keeping default one: $HAPROXY_SOCK${NC}"
 }
 
+
+interactive_mode() {
+  if grep -qiE 'ID_LIKE=.*(debian|ubuntu)' /etc/os-release; then
+  # Debian/Ubuntu
+    echo -e "${BLUE}Starting interactive session with netcat${NC}"
+    echo -e "Enter <prompt> to stay in interactive mode"
+    sudo nc -U "$HAPROXY_SOCK"
+  else
+  # RHEL/Rocky/Alma
+    echo -e "${RED}Starting interactive session with socat readline${NC}"
+    socat READLINE,history=$HOME/.haproxy_history UNIX-CONNECT:"$HAPROXY_SOCK"
+  fi
+}
+
+
 main_menu() {
   clear
   echo -e "${BLUE}======== HAProxy Socat Swiss Knife ========${NC}"
   echo -e " Socket: ${GREEN}$HAPROXY_SOCK${NC}"
+  echo -e " Press 101 to run in Interactive mode"
   echo  "1. Show Runtime Info        2. Show Errors"
   echo  "3. Active Sessions          4. Show Statistics"
   echo  "5. Peers Status             6. Select a Stick Table"
@@ -308,6 +324,7 @@ show_menu() {
       11) watch_stats ;;
       12) trigger_health_check ;;
       13) change_socket ;;
+      101) interactive_mode ;;
       0) exit 0 ;;
       *) echo -e "${RED}Invalid option${NC}" ;;
     esac
