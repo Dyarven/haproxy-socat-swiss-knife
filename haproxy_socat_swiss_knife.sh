@@ -312,17 +312,18 @@ interactive_mode() {
 
 main_menu() {
   clear
-  echo -e "${BLUE}======== HAProxy Socat Swiss Knife ========${NC}"
+  echo -e "${BLUE}========= HAProxy Socat Swiss Knife =========${NC}"
   echo -e " Socket: ${GREEN}$HAPROXY_SOCK${NC}"
   echo -e " Press 101 to run in Interactive mode"
-  echo  "1. Show Runtime Info        2. Show Errors"
-  echo  "3. Active Sessions          4. Show Statistics"
-  echo  "5. Peers Status             6. Select a Stick Table"
-  echo  "7. Clear Stick Table        8. List Frontend Details"
-  echo  "9. Change Backend Status   10. Check Cookies"
-  echo "11. Watch Statistics        12. Trigger Health Check"
-  echo "13. Change Socket            0. Exit"
-  echo -e "${BLUE}===========================================${NC}"
+  echo  "1. Show Runtime Info         2. Show Errors"
+  echo  "3. Active Sessions           4. Show Statistics"
+  echo  "5. Peers Status              6. Select a Stick Table"
+  echo  "7. Clear Stick Table         8. List Frontend Details"
+  echo  "9. Enable/Disable Frontend  10. Change Backend Status"
+  echo "11. Check Cookies            12. Watch Statistics"
+  echo "13. Trigger Health Check     14. Change Socket "
+  echo " 0. Exit"
+  echo -e "${BLUE}=============================================${NC}"
 }
 
 show_menu() {
@@ -340,11 +341,12 @@ show_menu() {
       6) show_stick_table ;;
       7) clear_stick_table ;;
       8) list_frontends ;;
-      9) change_backend_server_state ;;
-      10) check_cookies ;;
-      11) watch_stats ;;
-      12) trigger_health_check ;;
-      13) change_socket ;;
+      9) enable_disable_frontends ;;
+      10) change_backend_server_state ;;
+      11) check_cookies ;;
+      12) watch_stats ;;
+      13) trigger_health_check ;;
+      14) change_socket ;;
       101) interactive_mode ;;
       0) exit 0 ;;
       *) echo -e "${RED}Invalid option${NC}" ;;
