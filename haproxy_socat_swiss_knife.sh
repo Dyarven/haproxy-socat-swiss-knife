@@ -235,11 +235,9 @@ trigger_health_check() {
   PS3="Select a server: "
   select server in $server_list; do
     [ -z "$server" ] && return 1
-    # Show the current state for the selected server.
+    # Show/record the current state for the selected server.
     current_state=$(run_socat "show stat" | awk -F, -v bk="$selected_backend" -v srv="$server" '$1==bk && $2==srv {print $18}')
     echo -e "${GREEN}Selected server: $selected_backend/$server (current status: [$current_state])${NC}"
-
-    # Ask whether to enable or disable the health check.
     echo "Do you want to (e)nable or (d)isable health check? (e/d)"
     read -r action
 
@@ -247,16 +245,15 @@ trigger_health_check() {
       echo -e "${GREEN}Enabling health check for $selected_backend/$server...${NC}"
       run_socat "enable health $selected_backend/$server"
       echo -e "await for results... (30 retries)"
-
+      # Once enabled, loops through healthcheck results and stops when the backend state changes (or it reaches max attempts)
       for i in {1..30}; do
-        sleep 1  # wait a second between checks
+        sleep 1  # Wait a second between checks
         new_state=$(run_socat "show stat" | awk -F, -v bk="$selected_backend" -v srv="$server" '$1==bk && $2==srv {print $18}')
         echo -e "Attempt $i: Health-check result is ${GREEN}$new_state${NC}"
         if [ "$new_state" != "$current_state" ]; then
           break
         fi
       done
-
       echo -e "Current health-check status for ${GREEN}$selected_backend/$server${NC}: ${GREEN}$new_status${NC}"
 
     elif [[ "$action" =~ ^[dD] ]]; then
