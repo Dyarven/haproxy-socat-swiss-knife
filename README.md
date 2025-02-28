@@ -10,19 +10,19 @@ Managing large HAProxy instances can be complex, so being able to test and revie
 
 ---
 
-## 🛠 Features
+## Features
 - **Interactive and preset mode**: Includes a workaround to support interactive mode in Debian based systems using netcat and socat readline in RHEL based ones.
 - **Fast and simple:** Interactive menu with predefined and parsed complex commands to diagnose problems and make changes quickly.
 - **Self descriptive:** Pretty much run and gun.
 - **Lightweight & Efficient:** Ensures minimal resource usage for smooth performance.
 - **Native:** Fully made in bash with native tools.
 
-## ⚡Requirements
+## Requirements
 - Requires socat package and a running haproxy with the stats socket configured with admin permissions (duh)
 - Note that my functions assume that your HAProxy configuration doesn't have stick table IDs specified, so they share the backend name.
 
 
-## 🖥️ Usage
+## Usage
 ### Run the Script
 ```bash
 # Run as sudo (some commands require root to make changes)
