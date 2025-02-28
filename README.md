@@ -19,6 +19,8 @@ A tool to interact with the HAProxy socket using [socat](https://www.kali.org/to
 - Requires socat package and a running haproxy with the stats socket configured with admin permissions (duh)
 - Note that my functions assume that your HAProxy configuration doesn't have stick table IDs specified, so they share the backend name.
 
+## 🖥️ Usage
+
 ### Run the Script
 ```bash
 # run as sudo (some commands require root to make changes)
