@@ -1,4 +1,4 @@
-HAPROXY_SOCK="/run/haproxy/admin.sock"
+HAPROXY_SOCK="/var/run/haproxy/admin.sock"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -312,19 +312,22 @@ interactive_mode() {
 
 main_menu() {
   clear
-  echo -e "${BLUE}========= HAProxy Socat Swiss Knife =========${NC}"
+  echo -e "${BLUE}===================== HAProxy Socat Swiss Knife =======================${NC}"
   echo -e " Socket: ${GREEN}$HAPROXY_SOCK${NC}"
-  echo -e " Press 101 to run in Interactive mode"
-  echo  "1. Show Runtime Info         2. Show Errors"
-  echo  "3. Active Sessions           4. Show Statistics"
-  echo  "5. Peers Status              6. Select a Stick Table"
-  echo  "7. Clear Stick Table         8. List Frontends"
-  echo  "9. Enable/Disable Frontend  10. Change Backend Status"
-  echo "11. Check Cookies            12. Watch Statistics"
-  echo "13. Trigger Health Check     14. Change Socket "
+  echo -e " Press 101 to run in interactive mode"
+  echo  "1. Show Runtime Info           2. Show Errors"
+  echo  "3. Active Sessions             4. Show Statistics"
+  echo  "5. Peers Status                6. Select a Stick Table"
+  echo  "7. Clear Stick Table           8. List Frontends"
+  echo  "9. Enable/Disable Frontend    10. Change Backend Status"
+  echo "11. Check Cookies              12. Watch Statistics"
+  echo "13. Trigger Health Check       14. Change Socket "
   echo " 0. Exit"
-  echo -e "${BLUE}=============================================${NC}"
+  echo -e "${BLUE}=======================================================================${NC}"
+  echo -e "${BLUE}=======================================================================${NC}"
+  echo -e "${BLUE}==============github.com/Dyarven/haproxy-socat-swiss-knife=============${NC}"
 }
+
 
 show_menu() {
   check_reqs
