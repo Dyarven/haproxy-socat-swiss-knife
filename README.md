@@ -15,7 +15,7 @@ A tool to interact with the HAProxy socket using [socat](https://www.kali.org/to
 - **Lightweight & Efficient:** Ensures minimal resource usage for smooth performance.
 - **Native:** Fully made in bash with native tools.
 
-## ⚠️ Important
+## ⚡Requirements
 - Requires socat package and a running haproxy with the stats socket configured with admin permissions (duh)
 - Note that my functions assume that your HAProxy configuration doesn't have stick table IDs specified, so they share the backend name.
 
