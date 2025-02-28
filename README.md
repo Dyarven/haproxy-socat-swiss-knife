@@ -1,4 +1,4 @@
-# HAProxy Socat Swiss Knife
+# 🌐 HAProxy Socat Swiss Knife
 
 [![Star this repo](https://img.shields.io/github/stars/Dyarven/haproxy-socat-swiss-knife?style=social)](https://github.com/Dyarven/haproxy-socat-swiss-knife/stargazers)
 [![Follow me](https://img.shields.io/github/followers/Dyarven?style=social)](https://github.com/Dyarven)
