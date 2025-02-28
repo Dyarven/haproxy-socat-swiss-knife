@@ -29,7 +29,7 @@ run_socat() {
   echo "$output"
 }
 
-# Pending to use "state" or "status" for things, but not a mix of both in the select/switch FE/BE functions...
+# Use "state" or "status" in functions instead of a mix of both
 select_backend() {
   local stat_output
   stat_output=$(run_socat "show stat")
@@ -230,7 +230,7 @@ watch_stats() {
   interval=${interval:-2}
   echo -e "${GREEN}Starting monitoring (Ctrl+C to stop)...${NC}"
 
-  # God help anyone going back to this part
+  # Not sure if formatting is all that useful
   watch -n $interval -c "
     echo 'show stat' | socat unix-connect:'$HAPROXY_SOCK' stdio | \
     awk -F, 'BEGIN {ORS=\" \"}
@@ -318,7 +318,7 @@ main_menu() {
   echo  "1. Show Runtime Info         2. Show Errors"
   echo  "3. Active Sessions           4. Show Statistics"
   echo  "5. Peers Status              6. Select a Stick Table"
-  echo  "7. Clear Stick Table         8. List Frontend Details"
+  echo  "7. Clear Stick Table         8. List Frontends"
   echo  "9. Enable/Disable Frontend  10. Change Backend Status"
   echo "11. Check Cookies            12. Watch Statistics"
   echo "13. Trigger Health Check     14. Change Socket "
