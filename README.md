@@ -23,7 +23,7 @@ A tool to interact with the HAProxy socket using [socat](https://www.kali.org/to
 ## 🖥️ Usage
 ### Run the Script
 ```bash
-# run as sudo (some commands require root to make changes)
+# Run as sudo (some commands require root to make changes)
 bash haproxy_socat_swiss_knife.sh
 ```
 
@@ -31,7 +31,7 @@ bash haproxy_socat_swiss_knife.sh
 ```bash
 # Copy the script in /usr/local/bin as "hssk" and ensure proper permissions.
 chmod +x /usr/local/bin/hssk
-#Now you can run it from anywhere simply typing:
+# Now you can run it from anywhere simply typing:
 hssk
 ```
 
