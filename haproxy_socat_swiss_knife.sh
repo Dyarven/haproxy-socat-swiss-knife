@@ -29,7 +29,7 @@ run_socat() {
   echo "$output"
 }
 
-# Use "state" or "status" in functions instead of a mix of both
+# pending using "state" or "status" in functions instead of a mix of both
 select_backend() {
   local stat_output
   stat_output=$(run_socat "show stat")
@@ -63,15 +63,15 @@ list_frontends() {
   stat_output=$(run_socat "show stat")
 
   echo -e "${BLUE}=== Frontends ===${NC}"
-  # Show the list numbered to ease selection in next function. Need to define it inside AWK (since it's not aware of bash local variables)
+  # show the list numbered to ease selection in next function. Need to define it inside AWK (since it's not aware of bash local variables)
   echo "$stat_output" | awk -F, 'BEGIN {count=1} $2=="FRONTEND" {printf "%-3d %-20s %-10s %-15s\n", count++, $1, $2, $18}'
 }
 
-# Should add functionality to display status as well before modifying it
+# should add functionality to display status as well before modifying it
 enable_disable_frontend() {
   list_frontends
   local frontends
-  # Store frontends in array
+  # store frontends in array
   mapfile -t frontends < <(run_socat "show stat" | awk -F, '$2=="FRONTEND" {print $1}')
   read -rp "Enter a number (1-${#frontends[@]}): " num
   [[ ! "$num" =~ ^[0-9]+$ || $num -lt 1 || $num -gt ${#frontends[@]} ]] && return 1
@@ -161,7 +161,7 @@ change_backend_server_state() {
   select_backend || return
   echo -e "${GREEN}Selected backend: $selected_backend${NC}"
 
-  # List servers for the backend
+  # list servers for the backend
   local stat_output
   stat_output=$(run_socat "show stat")
   mapfile -t server_list < <(echo "$stat_output" | awk -F, -v bk="$selected_backend" 'NR>1 && $1==bk && $2 != "BACKEND" && $2 != "FRONTEND" {print $2","$18}')
@@ -230,7 +230,7 @@ watch_stats() {
   interval=${interval:-2}
   echo -e "${GREEN}Starting monitoring (Ctrl+C to stop)...${NC}"
 
-  # Not sure if formatting is all that useful
+  # not sure if current formatting is all that useful
   watch -n $interval -c "
     echo 'show stat' | socat unix-connect:'$HAPROXY_SOCK' stdio | \
     awk -F, 'BEGIN {ORS=\" \"}
@@ -256,7 +256,7 @@ trigger_health_check() {
   PS3="Select a server: "
   select server in $server_list; do
     [ -z "$server" ] && return 1
-    # Show/record the current state for the selected server.
+    # show/record the current state for the selected server.
     current_state=$(run_socat "show stat" | awk -F, -v bk="$selected_backend" -v srv="$server" '$1==bk && $2==srv {print $18}')
     echo -e "${GREEN}Selected server: $selected_backend/$server (current status: [$current_state])${NC}"
     echo "Do you want to (e)nable or (d)isable health check? (e/d)"
@@ -266,9 +266,9 @@ trigger_health_check() {
       echo -e "${GREEN}Enabling health check for $selected_backend/$server...${NC}"
       run_socat "enable health $selected_backend/$server"
       echo -e "await for results... (30 retries)"
-      # Once enabled, loops through healthcheck results and stops when the backend state changes (or it reaches max attempts)
+      # once enabled, loops through healthcheck results and stops when the backend state changes (or it reaches max attempts)
       for i in {1..30}; do
-        sleep 1  # Wait a second between checks
+        sleep 1
         new_state=$(run_socat "show stat" | awk -F, -v bk="$selected_backend" -v srv="$server" '$1==bk && $2==srv {print $18}')
         echo -e "Attempt $i: Health-check result is ${GREEN}$new_state${NC}"
         if [ "$new_state" != "$current_state" ]; then
@@ -334,7 +334,7 @@ show_menu() {
   while true; do
     main_menu
     read -rp "Enter choice: " choice
-    while read -t 0 -r -n 10000; do : ; done  # Clear input buffer
+    while read -t 0 -r -n 10000; do : ; done  # clear input buffer
     case $choice in
       1) show_info ;;
       2) show_errors ;;
