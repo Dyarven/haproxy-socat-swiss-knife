@@ -6,7 +6,7 @@
 
 A tool to interact with the HAProxy socket using [socat](https://www.kali.org/tools/socat/) to make frontend and server/backend state changes, view and clear stick-tables, enable healthchecks, control network traffic and requests and other stuff more easily.
 
-Managing large HAProxy instances can be complex so being able to test and review configs, as well as debugging network problems and strange behaviours comfortably becomes a necessity.
+Managing large HAProxy instances can be complex, so being able to test and review configs, as well as debugging network problems and strange behaviours comfortably becomes a necessity.
 
 ---
 
