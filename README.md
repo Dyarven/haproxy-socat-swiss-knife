@@ -5,12 +5,13 @@
 [![License](https://img.shields.io/github/license/Dyarven/haproxy-socat-swiss-knife)](https://github.com/Dyarven/haproxy-socat-swiss-knife/blob/main/LICENSE)
 
 A tool to interact with the HAProxy socket using [socat](https://www.kali.org/tools/socat/) to make frontend and server/backend state changes, view and clear stick-tables, enable healthchecks, control network traffic and requests and other stuff more easily.
+Managing large HAProxy instances can be complex so being able to test and review configs, as well as debugging network problems and strange behaviours comfortably becomes a necessity.
 
 ---
 
 ## 🛠 Features
 - **Interactive and preset mode**: Includes a workaround to support interactive mode in Debian based systems using netcat and socat readline in RHEL based ones.
-- **Fast and simple:** Interactive menu with predefined and parsed complex commands to diagnose problems quickly.
+- **Fast and simple:** Interactive menu with predefined and parsed complex commands to diagnose problems and make changes quickly.
 - **Self descriptive:** Pretty much run and gun.
 - **Lightweight & Efficient:** Ensures minimal resource usage for smooth performance.
 - **Native:** Fully made in bash with native tools.
