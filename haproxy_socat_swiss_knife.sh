@@ -69,7 +69,6 @@ list_frontends() {
   echo "$stat_output" | awk -F, 'BEGIN {count=1} $2=="FRONTEND" {printf "%-3d %-20s %-10s %-15s\n", count++, $1, $2, $18}'
 }
 
-# Should add functionality to display status as well before modifying it
 enable_disable_frontend() {
   list_frontends
   local frontends
