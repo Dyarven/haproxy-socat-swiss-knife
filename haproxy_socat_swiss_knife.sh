@@ -1,4 +1,5 @@
 #!/bin/bash
+
 HAPROXY_SOCK="/var/run/haproxy/admin.sock"
 
 # Colours for output
@@ -31,7 +32,6 @@ run_socat() {
   echo "$output"
 }
 
-# Pending using "state" or "status" in functions instead of a mix of both
 select_backend() {
   local stat_output
   stat_output=$(run_socat "show stat")
@@ -297,7 +297,6 @@ change_socket() {
     echo -e "${RED}Invalid socket. Keeping default one: $HAPROXY_SOCK${NC}"
 }
 
-
 interactive_mode() {
   if grep -qiE 'ID_LIKE=.*(debian|ubuntu)' /etc/os-release; then
   # Debian/Ubuntu
@@ -310,7 +309,6 @@ interactive_mode() {
     socat READLINE,history=$HOME/.haproxy_history UNIX-CONNECT:"$HAPROXY_SOCK"
   fi
 }
-
 
 main_menu() {
   clear
@@ -329,7 +327,6 @@ main_menu() {
   echo -e "${BLUE}==============github.com/Dyarven/haproxy-socat-swiss-knife=============${NC}"
   echo -e "${BLUE}=======================================================================${NC}"
 }
-
 
 show_menu() {
   check_reqs
