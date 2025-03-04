@@ -1,10 +1,12 @@
+#!/bin/bash
 HAPROXY_SOCK="/var/run/haproxy/admin.sock"
 
+# Colours for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m'
+NC='\033[0m' # No colour
 
 check_reqs() {
   if ! command -v socat >/dev/null 2>&1; then
@@ -344,7 +346,7 @@ show_menu() {
       6) show_stick_table ;;
       7) clear_stick_table ;;
       8) list_frontends ;;
-      9) enable_disable_frontends ;;
+      9) enable_disable_frontend ;;
       10) change_backend_server_state ;;
       11) check_cookies ;;
       12) watch_stats ;;
