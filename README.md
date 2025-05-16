@@ -26,7 +26,7 @@ Managing large HAProxy instances can be complex, so being able to test and revie
 ### Run the Script
 ```bash
 # Run as sudo (some commands require root to make changes)
-bash haproxy_socat_swiss_knife.sh
+bash haproxy_socat_swiss_knife
 ```
 
 ### Install as a program
