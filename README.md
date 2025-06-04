@@ -37,4 +37,9 @@ chmod +x /usr/local/bin/hssk
 hssk
 ```
 
-
+### Notes
+There is a cool way to interact with the admin stats panel (RW) that allows you to modify the state of servers and backends (this is not a functionality in my script but documented for posterity).
+You can use curl and send a payload applying the changes you want, once you find out the backend number checking the source code of the stats panel:
+```bash
+curl -x "" -u user:pass "http://HAPROXY_PANEL_IPADDR:PORT/haproxy?stats" --data-urlencode "s=server1-name" --data-urlencode "action=maint/ready" --data-urlencode "b=#XX" # your backend number I.E. b=#17
+ ```
