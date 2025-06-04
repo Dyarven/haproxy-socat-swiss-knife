@@ -36,6 +36,7 @@ chmod +x /usr/local/bin/hssk
 # Now you can run it from anywhere simply typing:
 hssk
 ```
+---
 
 ### Notes
 There is a cool way to interact with the admin stats panel (RW) that allows you to modify the state of servers and backends (this is not a functionality in my script but documented for posterity).
